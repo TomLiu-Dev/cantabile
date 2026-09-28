@@ -11,4 +11,5 @@
 - 检查 (audit): 和弦音、冲突、旋律完整、旋律被盖住等。
 - 评估脚本: 真人/渲染分类器 (`eval/discriminator.py`) 和旋律识别测试
   (`eval/heldout_melody.py`)。
+- `python -m cantabile download-piano`: 自动下载钢琴采样到 `~/.cantabile/piano/`, `play` 会自己找到。
 - 两个例子: 莫扎特土耳其进行曲、维瓦尔第"春"第一乐章 (Mutopia Project)。

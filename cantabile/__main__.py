@@ -4,6 +4,10 @@ import sys
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
+    if argv and argv[0] == "download-piano":
+        from .xiazai import xiazai
+        xiazai()
+        return 0
     if not argv or argv[0] != "play":
         from .cli import main as bianpei
         return bianpei(argv)

@@ -149,12 +149,15 @@ def xuanran(perf, shuchu, sfz=None, gongming=0.08):
     import wave
     import numpy as np
     shuchu = Path(shuchu)
+    if not sfz and not SFZ_MOREN:
+        from .xiazai import zhao_sfz
+        sfz = zhao_sfz()
     sfz = sfz or SFZ_MOREN
     if not sfz:
         from .render import to_midi
         mid = shuchu.with_suffix(".mid")
         to_midi(perf, mid)
-        print(f"没有指定钢琴采样 (--sfz 或者 CANTABILE_SFZ), 只写了 {mid}")
+        print(f"没有钢琴采样, 只写了 {mid}。先运行: python -m cantabile download-piano")
         return mid
     from .render.sfz import SFZSampler
     from .render import master, audible_end

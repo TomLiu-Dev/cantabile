@@ -6,19 +6,30 @@ performance: the melody brought out, dynamics, pedalling, tempo that breathes,
 velocity-dependent key timing (softer notes sound slightly later), damper and
 string resonance.
 
+**Listen first** (same piano, same mix; first 20 s is the MIDI played as written, then the same 20 s played by cantabile):
+[Mozart, Rondo alla Turca](https://github.com/TomLiu-Dev/cantabile/releases/download/v0.1.0/turkish_march_AB_compare.mp3) ·
+[Vivaldi, Spring](https://github.com/TomLiu-Dev/cantabile/releases/download/v0.1.0/spring_AB_compare.mp3)
+
 ```bash
 pip install -e .
-python -m cantabile play examples/spring.mid -o spring.mp3 --sfz path/to/SalamanderGrandPianoV3.sfz
+python -m cantabile download-piano        # piano samples, ~400 MB, once
+python -m cantabile play examples/spring.mid -o spring.mp3
 ```
 
-Needs Python 3.9+, ffmpeg, and an SFZ piano (see below). The rest of this
-page is in Chinese.
+Needs Python 3.9+ and ffmpeg. The rest of this page is in Chinese.
 
 把 MIDI 用钢琴采样弹出来, 听起来像人在弹。谱子上的音一个都不改, 只加演奏:
 旋律突出、力度起伏、踏板、速度有呼吸、按键时间差 (弱的音稍晚一点响)、制音器和
 琴弦共鸣。
 
 另外还有一个编配模式: 给一条旋律加和弦进行, 生成钢琴伴奏。
+
+## 先听听
+
+同一台钢琴、同一套混音。每段前 20 秒是 MIDI 原样播放 (力度都一样、速度像节拍器、不踩踏板), 后 20 秒是同一段用 cantabile 弹的:
+
+- 莫扎特《土耳其进行曲》: [对比](https://github.com/TomLiu-Dev/cantabile/releases/download/v0.1.0/turkish_march_AB_compare.mp3) · [完整版](https://github.com/TomLiu-Dev/cantabile/releases/download/v0.1.0/turkish_march_B_cantabile.mp3)
+- 维瓦尔第《四季·春》第一乐章 (弦乐合奏谱直接放到钢琴上弹): [对比](https://github.com/TomLiu-Dev/cantabile/releases/download/v0.1.0/spring_AB_compare.mp3) · [完整版](https://github.com/TomLiu-Dev/cantabile/releases/download/v0.1.0/spring_B_cantabile.mp3)
 
 ## 安装
 
@@ -33,8 +44,14 @@ pip install -e .
 系统里要有 `ffmpeg` (macOS: `brew install ffmpeg`, Debian/Ubuntu:
 `apt install ffmpeg`)。
 
-钢琴采样不在仓库里, 要自己下载。我用的是 Alexander Holm 的 Salamander Grand
-Piano V3 (SFZ 格式, CC-BY 3.0), 在 FreePats 下载:
+钢琴采样不在仓库里, 第一次用先下载 (约 400 MB, 放在 `~/.cantabile/piano/`):
+
+```bash
+python -m cantabile download-piano
+```
+
+下载的是 Alexander Holm 的 Salamander Grand Piano V3 (SFZ 格式, CC-BY 3.0),
+来源 FreePats, 也可以手动下载:
 <https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html>
 选 `SalamanderGrandPianoV3+20161209_44khz16bit.tar.xz` (约 394 MB)。别的 SFZ
 钢琴应该也能用, 但下面的数字都是用这个测的。
@@ -42,11 +59,11 @@ Piano V3 (SFZ 格式, CC-BY 3.0), 在 FreePats 下载:
 ## 用法
 
 ```bash
-python -m cantabile play 曲子.mid -o 曲子.mp3 --sfz path/to/SalamanderGrandPianoV3.sfz
+python -m cantabile play 曲子.mid -o 曲子.mp3
 ```
 
 - `-o`: 输出文件, 默认是和 MIDI 同名的 `.mp3`; 写 `.wav` 就输出 wav。
-- `--sfz`: 钢琴采样。也可以设环境变量 `CANTABILE_SFZ`, 就不用每次写。
+- `--sfz`: 钢琴采样。不写的话先看环境变量 `CANTABILE_SFZ`, 再找 `download-piano` 下载的那个。
   两个都没有的话只输出一个处理过的 `.mid`。
 - `--bpm`: 速度, 默认用 MIDI 里写的。MIDI 里是 60 (很多导出软件不写速度时的
   默认值) 的话会先用 100, 最好自己指定。
