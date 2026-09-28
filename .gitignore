@@ -1,0 +1,78 @@
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Environments -----------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# --- Tooling ----------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+.hypothesis/
+
+# --- Editors / OS -----------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# --- cantabile artefacts ----------------------------------------------------
+# Generated performances and their masters.  Renders are reproducible from the
+# source tune + style, so they never belong in the repo.
+out/
+renders/
+*.mid
+*.midi
+!examples/*.mid
+*.wav
+*.flac
+*.mp3
+*.ogg
+
+# Soundfonts are large and separately licensed; point at them by path instead.
+*.sf2
+*.sf3
+
+# Reference recordings used for calibration, and the analysis caches built from
+# them.  The measured numbers live in the docs; the audio does not ship.
+references/
+*.npy
+*.npz
+.cantabile_cache/
+
+# Held-out evaluation files are engraved scores plus four-part MIDI that are
+# not ours to redistribute.  eval/heldout_melody.py reads whatever is placed
+# here.
+eval/heldout/*
+!eval/heldout/README.md
+*.pdf

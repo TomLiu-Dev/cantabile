@@ -1,0 +1,92 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cantabile"
+version = "0.1.0"
+description = "Renders MIDI on a sampled piano so it sounds played by a person: every note kept, human performance added."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Tom Liu" }]
+maintainers = [{ name = "Tom Liu" }]
+keywords = [
+    "music",
+    "midi",
+    "piano",
+    "performance",
+    "expressive-performance",
+    "humanization",
+    "micro-timing",
+    "arrangement",
+    "voicing",
+    "harmony",
+    "accompaniment",
+    "sfz",
+    "audio-analysis",
+    "fluidsynth",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Sound/Audio :: MIDI",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+]
+dependencies = [
+    "soundfile>=0.12",
+    "mido>=1.2",
+    "MIDIUtil>=1.2",
+    "numpy>=1.21",
+    "scipy>=1.7",
+]
+
+[project.optional-dependencies]
+# Acoustic measurement (the audit checks that listen to rendered audio).
+analysis = [
+    "librosa>=0.10",
+]
+# Score-image cross-check in cantabile.ingest (staff lines and noteheads).
+sheet = [
+    "pillow>=9.0",
+]
+# eval/discriminator.py
+eval = [
+    "librosa>=0.10",
+    "soundfile>=0.12",
+    "scikit-learn>=1.0",
+]
+dev = [
+    "ruff>=0.4",
+]
+
+[project.scripts]
+cantabile = "cantabile.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cantabile"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/cantabile",
+    "/docs",
+    "/examples",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+    "/CONTRIBUTING.md",
+    "/CHANGELOG.md",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
